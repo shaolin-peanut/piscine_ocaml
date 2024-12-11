@@ -1,4 +1,4 @@
-DIRS := $(addprefix ex,$(shell seq 0 6))
+DIRS := $(addprefix ex0,$(shell seq 0 6))
 
 # find files in dirs, which are in subdirectories of curreent directory, like ex00, ex01, etc, by using DIRS var
 SRCS := $(shell find $(DIRS) -name '*.ml')
