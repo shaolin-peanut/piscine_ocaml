@@ -27,7 +27,7 @@ download_arch_vdi() {
         fi
 
         while [ ! -f "$VDI_NAME" ]; do
-            echo "File not found. Please extract the .7z archive."
+            echo "File not found. Please extract the .7z archive by opening /goinfre/$(whoami) and double-clicking on the .7z file."
             read -p "Press Enter after extracting the .7z file..."
         done
         echo "The virtual disk image is ready."
