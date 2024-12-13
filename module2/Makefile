@@ -1,4 +1,4 @@
-DIRS := $(addprefix ex0,$(shell seq 0 4))
+DIRS := $(addprefix ex0,$(shell seq 0 8))
 
 SRCS := $(shell find $(DIRS) -name '*.ml')
 

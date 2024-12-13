@@ -1,4 +1,5 @@
-let fibonacci n =
+(* not tail recursive ... *)
+(* let fibonacci n =
   let rec fibonacci_acc n acc =
     if n = 0 then 0
     else if n = 1 then 1
@@ -8,21 +9,21 @@ let fibonacci n =
   if n < 0 then
     -1
   else
-    fibonacci_acc n 0
-
+    fibonacci_acc n 0 *)
+let fibonacci n =
+  let rec fibonacci_acc n current next =
+    if n = 0 then current
+    else fibonacci_acc (n - 1) next (current + next)
+  in
+  if n < 0 then
+    -1
+  else
+    fibonacci_acc n 0 1
+    
 let () = (
-  print_endline (string_of_int (fibonacci (-42)));
-  print_endline (string_of_int (fibonacci 0));
-  print_endline (string_of_int (fibonacci 1));
-  print_endline (string_of_int (fibonacci 2));
-  print_endline (string_of_int (fibonacci 3));
-  print_endline (string_of_int (fibonacci 4));
-  print_endline (string_of_int (fibonacci 5));
-  print_endline (string_of_int (fibonacci 6));
-  print_endline (string_of_int (fibonacci 7));
-  print_endline (string_of_int (fibonacci 8));
-  print_endline (string_of_int (fibonacci 9));
-  print_endline (string_of_int (fibonacci 10));
+  List.iter ( fun n ->
+    fibonacci n |> string_of_int |> print_endline)
+    [(-42); 0; 1; 2; 3; 4; 5; 6; 7; 8; 9; 10];
   
   assert (fibonacci 0 = 0);
   assert (fibonacci 1 = 1);
