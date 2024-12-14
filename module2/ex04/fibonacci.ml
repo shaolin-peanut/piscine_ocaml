@@ -10,6 +10,7 @@
     -1
   else
     fibonacci_acc n 0 *)
+
 let fibonacci n =
   let rec fibonacci_acc n current next =
     if n = 0 then current
@@ -19,11 +20,13 @@ let fibonacci n =
     -1
   else
     fibonacci_acc n 0 1
-    
+
+
 let () = (
   List.iter ( fun n ->
+    print_string @@ "[" ^ (string_of_int n) ^ "]: ";
     fibonacci n |> string_of_int |> print_endline)
-    [(-42); 0; 1; 2; 3; 4; 5; 6; 7; 8; 9; 10];
+    [(-42); 0; 1; 2; 3; 4; 5; 6; 7; 8; 9; 10; 50];
   
   assert (fibonacci 0 = 0);
   assert (fibonacci 1 = 1);
@@ -44,5 +47,6 @@ let () = (
   assert (fibonacci 16 = 987);
   assert (fibonacci 17 = 1597);
   assert (fibonacci 18 = 2584);
-  assert (fibonacci 19 = 4181)
+  assert (fibonacci 19 = 4181);
+  assert (fibonacci 50 = 12586269025)
 )
