@@ -27,7 +27,14 @@ download_arch_vdi() {
         fi
 
         while [ ! -f "$VDI_NAME" ]; do
-            echo "File not found. Please extract the .7z archive by opening /goinfre/$(whoami) and double-clicking on the .7z file."
+            echo "File not found. Please extract the .7z archive first"
+            echo "Open /goinfre/$(whoami) and double-clicking on the .7z file?"
+            read -p "Choice: " yn
+            if [ "$yn" == "y"]; then
+                open "/goinfre/$(whoami)"
+            elso
+                echo "Make sure you extrac the file at /goinfre/$(whoami)" before continuing
+            fi
             read -p "Press Enter after extracting the .7z file..."
         done
         echo "The virtual disk image is ready."
@@ -98,7 +105,7 @@ if [ "$choice" -eq 1 ]; then
     download_arch_vdi
     setup_vm
     add_shared_folder
-    VBoxManage startvm "$VM_NAME" --type headless
+    VBoxManage startvm "$VM_NAME"
     echo "VM '$VM_NAME' has been set up and started."
 
     echo -e "\n-----------------------------------------"
