@@ -1,28 +1,43 @@
-type occ = char * int
+(* O(n^2) time complexity because of list rebuilding and reversal needed in main *)
+(* let encode lst =
+  let rec helper lst acc =
+    match lst with
+    | [] -> acc
+    | h :: t -> begin
+      match acc with
+      | [] -> helper t [(h, 1)]
+      | (elem, count) :: acc_t ->
+        if h = elem then
+          helper t ((elem, count + 1) :: acc_t)
+        else
+          helper t ((h, 1) :: acc)
+    end
+  in
+  helper lst [] *)
 
+
+(* 0(n) time complexity *)
 let encode lst =
-  match lst with
-  | [] -> []
-  | _ :: _ ->
-    let rec helper lst acc =
-      match lst with
-      | [] -> acc
-      | h :: t ->
-        match acc with
-        | [] -> helper t [(h, 1)]
-        | (elem, count) :: acc_t ->
-          if h = elem then
-            helper t ((elem, count + 1) :: acc_t)
-          else
-            helper t ((h, 1) :: (elem, count) :: acc_t)
+  let rec helper lst run =
+    match lst, run with
+    | [], (elem, count) -> [(elem, count)]
+    | h :: t, (elem, count) -> begin
+      if h = elem then
+        helper t (elem, count + 1)
+      else
+        (elem, count) :: helper t (h, 1)
+      end
     in
-    helper lst []
+    match lst with
+    | [] -> []
+    | h :: t ->
+      helper t (h, 1)
 
 let print_result lst result =
   Printf.printf "Input: %s\n" (String.concat "" (List.map (String.make 1) lst));
-  Printf.printf "Output:\n";
+  Printf.printf "Output:";
   List.iter (fun (el, count) ->
-    Printf.printf "  %c: %d\n" el count
+    Printf.printf "%c%d" el count
   ) result;
   Printf.printf "\n"
 
