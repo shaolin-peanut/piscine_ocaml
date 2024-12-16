@@ -19,6 +19,6 @@ let crossover lsta lstb =
 
 let () =
   let lsta = [1; 2; 3; 4; 5] in
-  let lstb = [6; 7; 8; 9; 10] in
+  let lstb = [6; 7; 1; 9; 3] in
   let lstc = crossover lsta lstb in
-  print_endline (string_of_int (List.length lstc))
+  List.iter (fun el -> print_endline (string_of_int el)) lstc;
