@@ -49,3 +49,4 @@ So here are the links to each. You need an active 42 account though
             101 | 010 | 111
             110 | 011 | 101
             111 | 011 | 100
+- https://projects.intra.42.fr/projects/ocaml-monoids-and-monads-3
