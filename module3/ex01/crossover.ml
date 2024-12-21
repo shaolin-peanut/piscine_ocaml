@@ -1,5 +1,5 @@
 let crossover lsta lstb =
-  let rec exists elem lst =
+  let rec exists elem =
     match lst with
     | [] -> false
     | h :: t -> if elem = h then true
