@@ -1,4 +1,4 @@
-(* gray  *)
+(** [gray] prints the gray code of every number with [n] digits  *)
 let gray (n : int) =
   (** [pow2 n] returns 2 raised to the power of [n] *)
   let rec pow2 n =
@@ -39,3 +39,4 @@ let () =
   gray 3;
   gray 4;
   gray 5;
+  (* gray 10; *)

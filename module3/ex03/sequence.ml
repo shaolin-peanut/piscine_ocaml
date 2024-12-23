@@ -1,3 +1,4 @@
+(** [encode] does run-length encoding on a list of ints *)
 let encode lst =
   let rec helper lst run =
     match lst, run with
@@ -13,6 +14,7 @@ let encode lst =
       | [] -> []
       | h :: t -> helper t (h, 1)
 
+(** [flatten] flattens a list of tuples into a list of the contents of the tuples *)
 let rec flatten lst =
   match lst with
   | [] -> []
@@ -36,7 +38,8 @@ let sequence n =
         let lst = loop (n - 1) in
         lst |> flatten |> encode
     in
-    rle_to_string (loop n)
+    n |> loop |> rle_to_string
+    (* rle_to_string (loop n) *)
 
 let () =
     let test_cases = [
@@ -49,7 +52,7 @@ let () =
     ] in
     List.iter (fun (n, result) ->
       print_endline @@ (string_of_int n) ^ " Output: " ^ (sequence n);
-      print_endline @@ "Expected: " ^ result;
+      (* print_endline @@ "Expected: " ^ result; *)
     ) test_cases
 
 (* this one was difficult

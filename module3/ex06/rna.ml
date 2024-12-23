@@ -75,11 +75,51 @@ let generate_rna (helix : helix) : rna =
     | [] -> []
     | h :: t ->
         match h.base with
-        | A -> { h with base = T } :: loop t
+        | A -> { h with base = U } :: loop t
         | C -> { h with base = G } :: loop t
         | G -> { h with base = C } :: loop t
-        | T -> { h with base = U } :: loop t
-        | U -> { h with base = T } :: loop t
-        | None -> loop t
+        | T -> { h with base = A } :: loop t
+        | None | U -> loop t
   in
   loop helix
+
+let test_generate_rna () =
+  let helix1 = [
+    { base = A; phosphate = "p"; deoxyribose = "d" };
+    { base = T; phosphate = "p"; deoxyribose = "d" };
+    { base = C; phosphate = "p"; deoxyribose = "d" };
+    { base = G; phosphate = "p"; deoxyribose = "d" };
+    { base = None; phosphate = "p"; deoxyribose = "d" };
+  ] in
+
+  let rna1 = generate_rna helix1 in
+  let rna1_str = helix_to_string rna1 in
+
+  Printf.printf "Test 1:\n";
+  Printf.printf "  Input Helix: %s\n" (helix_to_string helix1);
+  Printf.printf "  Output RNA:  %s\n" rna1_str;
+  Printf.printf "  Expected: 'UAGC'\n";
+
+  let helix2 = [] in
+  let rna2 = generate_rna helix2 in
+  Printf.printf "\nTest 2:\n";
+  Printf.printf "  Input Helix: (empty)\n";
+  Printf.printf "  Output RNA:  %s\n" (helix_to_string rna2);
+
+
+  let helix3 = [
+    { base = T; phosphate = "p"; deoxyribose = "d" };
+    { base = T; phosphate = "p"; deoxyribose = "d" };
+    { base = A; phosphate = "p"; deoxyribose = "d" };
+  ] in
+
+  let rna3 = generate_rna helix3 in
+  let rna3_str = helix_to_string rna3 in
+
+  Printf.printf "\nTest 3:\n";
+  Printf.printf "  Input Helix: %s\n" (helix_to_string helix3);
+  Printf.printf "  Output RNA:  %s\n" rna3_str;
+  Printf.printf "  Expected: 'U A G C'\n"
+;;
+
+let () = test_generate_rna ()

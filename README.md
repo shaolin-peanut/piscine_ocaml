@@ -39,7 +39,7 @@ So here are the links to each. You need an active 42 account though
     `gray n = n XOR (n >> 1)`
     In ocaml xor is lxor and right shift is lsr (logical shift right)
     `gray n = n lxor (n lsr 1)`
-    - you should see it when looking at the examples, there's a xor (or but not and) copmaring the binary and shifted number digit by digit, and retaining every instance of there being one or the other but not both, which means only one bit flips (with OR there could be more, since it permits AND)
+    - you should see it when looking at the examples, there's a xor (or BUT not and) copmaring the binary and shifted number digit by digit, and retaining every instance of there being one or the other but not both, which means only one bit flips (with OR there could be more, since it permits AND)
         - > Binary | Shifted | Gray
             000 | 000 | 000
             001 | 000 | 001
@@ -49,4 +49,9 @@ So here are the links to each. You need an active 42 account though
             101 | 010 | 111
             110 | 011 | 101
             111 | 011 | 100
-- https://projects.intra.42.fr/projects/ocaml-monoids-and-monads-3
+- ex03: look and say
+    - it's a sequence where n2 is looking at n2 and doing run-length encoding on it, then n3 looks at n3 and 'run-length encodes' it, etc. Makes you think about which data structure to use
+        - my solution is very sub-optimal since I just wanted to re-use the run-length encoding function. A list of numbers is my base type, in each recursive call I do the RLE, returning a list of tuples (count, elem) and then flatten it so it's just a list of ints, which I return
+        - then another function turns the list into a string
+- ex04: dna stuff (playing with types)
+- bonuses: a lot more types
