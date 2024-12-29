@@ -6,18 +6,14 @@ all: $(DIRS)
 
 $(DIRS):
 	@echo "Compiling $@..."
-	@if ls $@/*.ml >/dev/null 2>&1; then \
-		cd $@ && \
-		for file in *.ml; do \
-			if [ "$$file" != "main.ml" ]; then \
-				ocamlopt -c $$file; \
-			fi; \
-		done && \
-		ocamlopt -c main.ml && \
-		ocamlopt -o $@ *.cmx; \
-	else \
-		echo "No .ml files found in $@, skipping..."; \
-	fi
+	cd $@ && \
+	for file in *.ml; do \
+		if [ "$$file" != "main.ml" ]; then \
+			ocamlopt -c $$file; \
+		fi; \
+	done && \
+	ocamlopt -c main.ml && \
+	ocamlopt -o $@ $$(ls *.cmx | grep -v main.cmx) main.cmx
 
 clean:
 	@echo "Cleaning up..."
