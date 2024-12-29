@@ -119,7 +119,7 @@ let test_generate_rna () =
   Printf.printf "\nTest 3:\n";
   Printf.printf "  Input Helix: %s\n" (helix_to_string helix3);
   Printf.printf "  Output RNA:  %s\n" rna3_str;
-  Printf.printf "  Expected: 'U A G C'\n"
+  Printf.printf "  Expected: 'AAU'\n"
 ;;
 
 let () = test_generate_rna ()
