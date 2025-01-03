@@ -83,69 +83,13 @@ let newCard value color =
     value = value;
   }
 
-let allSpades = [
-  { color = Color.Spade; value = Value.T2};
-  { color = Color.Spade; value = Value.T3};
-  { color = Color.Spade; value = Value.T4};
-  { color = Color.Spade; value = Value.T5};
-  { color = Color.Spade; value = Value.T6};
-  { color = Color.Spade; value = Value.T7};
-  { color = Color.Spade; value = Value.T8};
-  { color = Color.Spade; value = Value.T9};
-  { color = Color.Spade; value = Value.T10};
-  { color = Color.Spade; value = Value.Jack};
-  { color = Color.Spade; value = Value.Queen};
-  { color = Color.Spade; value = Value.King};
-  { color = Color.Spade; value = Value.As};
-]
+let allSpades = List.map (fun x -> { color = Color.Spade; value = x}) Value.all
 
-let allHearts = [
-  { color = Color.Heart; value = Value.T2};
-  { color = Color.Heart; value = Value.T3};
-  { color = Color.Heart; value = Value.T4};
-  { color = Color.Heart; value = Value.T5};
-  { color = Color.Heart; value = Value.T6};
-  { color = Color.Heart; value = Value.T7};
-  { color = Color.Heart; value = Value.T8};
-  { color = Color.Heart; value = Value.T9};
-  { color = Color.Heart; value = Value.T10};
-  { color = Color.Heart; value = Value.Jack};
-  { color = Color.Heart; value = Value.Queen};
-  { color = Color.Heart; value = Value.King};
-  { color = Color.Heart; value = Value.As};
-]
+let allHearts = List.map (fun x -> { color = Color.Heart; value = x}) Value.all
 
-let allDiamonds = [
-  { color = Color.Diamond; value = Value.T2};
-  { color = Color.Diamond; value = Value.T3};
-  { color = Color.Diamond; value = Value.T4};
-  { color = Color.Diamond; value = Value.T5};
-  { color = Color.Diamond; value = Value.T6};
-  { color = Color.Diamond; value = Value.T7};
-  { color = Color.Diamond; value = Value.T8};
-  { color = Color.Diamond; value = Value.T9};
-  { color = Color.Diamond; value = Value.T10};
-  { color = Color.Diamond; value = Value.Jack};
-  { color = Color.Diamond; value = Value.Queen};
-  { color = Color.Diamond; value = Value.King};
-  { color = Color.Diamond; value = Value.As};
-]
+let allDiamonds = List.map (fun x -> { color = Color.Diamond; value = x}) Value.all
 
-let allClubs = [
-  { color = Color.Club; value = Value.T2};
-  { color = Color.Club; value = Value.T3};
-  { color = Color.Club; value = Value.T4};
-  { color = Color.Club; value = Value.T5};
-  { color = Color.Club; value = Value.T6};
-  { color = Color.Club; value = Value.T7};
-  { color = Color.Club; value = Value.T8};
-  { color = Color.Club; value = Value.T9};
-  { color = Color.Club; value = Value.T10};
-  { color = Color.Club; value = Value.Jack};
-  { color = Color.Club; value = Value.Queen};
-  { color = Color.Club; value = Value.King};
-  { color = Color.Club; value = Value.As};
-]
+let allClubs = List.map (fun x -> { color = Color.Club; value = x}) Value.all
 
 let all = allSpades @ allHearts @ allDiamonds @ allClubs
 
