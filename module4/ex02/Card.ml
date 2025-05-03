@@ -83,14 +83,15 @@ let newCard value color =
     value = value;
   }
 
-let allSpades = List.map (fun x -> { color = Color.Spade; value = x}) Value.all
+let allOfX color =
+        List.map (fun x ->
+        { color = color; value = x }
+        ) Value.all
 
-let allHearts = List.map (fun x -> { color = Color.Heart; value = x}) Value.all
-
-let allDiamonds = List.map (fun x -> { color = Color.Diamond; value = x}) Value.all
-
-let allClubs = List.map (fun x -> { color = Color.Club; value = x}) Value.all
-
+let allSpades = allOfX Color.Spade
+let allHearts = allOfX Color.Heart
+let allDiamonds = allOfX Color.Diamond
+let allClubs = allOfX Color.Club
 let all = allSpades @ allHearts @ allDiamonds @ allClubs
 
 let getValue card = function
@@ -101,27 +102,65 @@ let getColor card = function
 
 let isOf card color =
   match card with
-  | { color = c; _} ->
-    if c = color then true
-    else false
+  | { color = c; _} when c = color -> true
+  | _ -> false
 
 let isSpade card = isOf card Color.Spade
 let isDiamond card = isOf card Color.Diamond
 let isHeart card = isOf card Color.Heart
 let isClub card = isOf card Color.Club
 
+let toString (card : t) : string =
+        Value.toString card.value
+        ^ Color.toString card.color
 
+let toStringVerbose (card : t) : string =
+        "Card(" ^ Value.toStringVerbose card.value
+        ^ "," ^ Color.toStringVerbose card.color ^ ")"
+
+(** returns 0 if x = y, 1 if x > y, -1 if x < y *)
+let compare x y =
+        let vx = Value.toInt x.value and vy = Value.toInt y.value in
+        if vx = vy then 0
+        else if vx > vy then 1
+        else -1
+
+let max x y =
+        if compare x y > -1 then x
+        else y
+
+let min x y =
+        if compare x y <=0 then x
+        else y
+
+let compare_with_next lst =
+        match lst with
+        | [] -> invalid_arg "Empty list"
+        | h :: (h2 :: t) ->
+                if compare h h2 > -1 then h
+                else h2
+        | h :: [] -> h
+
+let best lst =
+        match lst with
+        | [] -> invalid_arg "Empty list"
+        | h :: t ->
+                let find_best best_so_far x =
+                        if compare best_so_far x < 0 then x
+                        else best_so_far
+                in
+                List.fold_left find_best h t
 (* 
 [ ] todo:
-val toString : t -> string
-val toStringVerbose : t -> string
-val compare : t -> t -> int
 val max : t -> t -> t
 val min : t -> t -> t
 val best : t list -> t
 
 
 [x] done:
+val compare : t -> t -> int
+val toString : t -> string
+val toStringVerbose : t -> string>
 val newCard : Value.t -> Color.t -> t
 val allSpades : t list
 val allHearts : t list
